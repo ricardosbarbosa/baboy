@@ -1,0 +1,83 @@
+<h2>Movimentações</h2>
+<div style="width: 200px; margin-left: auto ; margin-right: auto ;" ng-init="hideDetalhes = true; icon = '+'">
+  <h3>{{saldoEfetuado | currency}}</h3>
+  <span>de {{saldoLivre | currency}}</span>
+  <span class="label label-default label-warning" ng-click="hideDetalhes = !hideDetalhes; icon = '-'">{{icon}}</span>
+
+  <div ng-hide="hideDetalhes">
+    <div class="circle row-credito" style="float: right;"></div>
+    <h3>{{totalEfetuadoCredito | currency}}</h3>
+    <span>de {{totalLivreCredito | currency}}</span>
+    <hr />
+    <div class="circle row-debito" style="float: right;"></div>
+    <h3>{{totalEfetuadoDebito | currency}}</h3>
+    <span>de {{totalLivreDebito | currency}}</span>
+    <hr />
+  </div>
+  
+</div>
+
+<br />
+<div>
+ <progress>
+    <bar value="(totalEfetuadoCredito / (totalEfetuadoCredito + totalEfetuadoDebito))*100" type="success">
+      <span ng-hide="false">{{totalEfetuadoCredito | currency}}</span>
+    </bar>
+    <bar value="(totalEfetuadoDebito / (totalEfetuadoCredito + totalEfetuadoDebito))*100" type="danger">
+      <span ng-hide="false">{{totalEfetuadoDebito | currency}}</span>
+    </bar>
+  </progress> 
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Filtro
+  
+  <button type="button" class="btn btn-link" ng-click="filtrar('credito')">credito</button>
+  <button type="button" class="btn btn-link" ng-click="filtrar('debito')">debito</button>
+  <button type="button" class="btn btn-link" ng-click="filtrar('')">todas</button>
+
+  <div class="btn-group">
+    <label class="btn btn-primary" ng-click="changedate(-1)"> < </label>
+    <label class="btn btn-primary" >{{filterDate | date:'MMMM - yyyy'}}</label>
+    <label class="btn btn-primary" ng-click="changedate(1)"> > </label>
+  </div>  
+
+  <div class="btn-group pull-right" >
+    <button type="button" class="btn btn-success" data-toggle="modal" href="#myModal">+ Receita</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" href="#myModal">+ Despesa</button>
+  </div>
+
+  </div>
+
+  <div class="slide-animate" ng-include="'modals/transacao.html'"></div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th><th></th>
+        <th>Valor</th>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Categoria</th>
+      </tr>
+    </thead>
+
+     <tbody >
+      <!-- <tr ng-repeat="move in movimentacoes" ng-class="{'row-credito': move.tipo == 'credito', 'row-debito': move.tipo == 'debito'}"> -->
+      <tr ng-repeat="move in movimentacoes | filter: filtro " >
+        <td>
+          <span ng-bind-html="move.efetuado | efetuado" ng-click="efetuado(move)"> </span>
+        </td>
+        <td>
+          <div class="circle" ng-class="{'row-credito': move.tipo == 'credito', 'row-debito': move.tipo == 'debito'}"></div>
+        </td>
+        <td>{{move.valor | currency}}</td>
+        <td>{{move.date | date:'dd/MM/yyyy'}}</td>
+        <td>{{move.descricao}}</td>
+        <td>{{move.categoria}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

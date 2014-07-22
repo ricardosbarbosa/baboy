@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  conta_id: 
+  tipo: MyString
+  valor: 9.99
+  data: 2014-06-29
+  descricao: MyString
+  categoria: MyString
+  efetuado: false
+
+two:
+  conta_id: 
+  tipo: MyString
+  valor: 9.99
+  data: 2014-06-29
+  descricao: MyString
+  categoria: MyString
+  efetuado: false

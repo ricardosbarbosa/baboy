@@ -1,0 +1,41 @@
+
+<div ng-controller="ContaCtrl as conta">
+  <hr />      
+  <div class="btn-group">
+      <label class="btn btn-primary" ng-click="changedate(-1)"> < </label>
+      <label class="btn btn-primary" >{{date | date:'MMMM - yyyy'}}</label>
+      <label class="btn btn-primary" ng-click="changedate(1)"> > </label>
+  </div>  
+  <hr />
+
+  <progress>
+    <bar value="55" type="success">
+      <span ng-hide="false">55%</span>
+    </bar>
+    <bar value="45" type="danger">
+      <span ng-hide="false">45%</span>
+    </bar>
+  </progress>
+  
+  <div >
+    {{contas[0].nome}} {{contas[0].saldo | currency}}
+
+
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+
+    <h4>Default</h4>
+    <rating 
+    ng-model="rate" max="10" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+  </div>
+
+<a href="#" tooltip="jjj">tooltip </a> 
+<a href="#/phones/{{date}}">rotas</a>
+
+<conta-detalhes></conta-detalhes>
+
+{{true | checkmark}}
+{{false| checkmark}}</
+
+</div>
